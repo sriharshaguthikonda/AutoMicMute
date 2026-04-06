@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Auto Mic Mute"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Automatically mute mic when audio plays"
+            android:textColor="#9E9E9E"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Mic Status Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:padding="24dp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:id="@+id/iv_mic_icon"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@android:drawable/ic_btn_speak_now"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/tv_mic_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Microphone: Active"
+                android:textColor="#28A745"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/tv_audio_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Audio: Silent"
+                android:textColor="#6C757D"
+                android:textSize="16sp"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/tv_stream_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Active streams: 0"
+                android:textColor="#9E9E9E"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <!-- Service Status Card -->
+        <LinearLayout
+            android:id="@+id/layout_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/card_background"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <View
+                android:id="@+id/indicator_dot"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="@drawable/dot_red"
+                android:layout_marginEnd="12dp" />
+
+            <TextView
+                android:id="@+id/tv_service_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Service: Stopped"
+                android:textColor="#DC3545"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Start/Stop Button -->
+        <Button
+            android:id="@+id/btn_toggle_service"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Start Monitoring"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Settings Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:padding="20dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Settings"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Unmute Delay -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Unmute delay after audio stops"
+                android:textColor="#BDBDBD"
+                android:textSize="14sp"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prevents mic toggling during brief pauses"
+                android:textColor="#757575"
+                android:textSize="12sp"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="20dp">
+
+                <SeekBar
+                    android:id="@+id/seek_unmute_delay"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:min="0"
+                    android:max="10"
+                    android:progress="3"
+                    android:progressTint="#007BFF"
+                    android:thumbTint="#007BFF" />
+
+                <TextView
+                    android:id="@+id/tv_delay_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1500ms"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:minWidth="60dp"
+                    android:gravity="end"
+                    android:layout_marginStart="12dp" />
+
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#2C2C2C"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Auto Start on Boot -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Start on boot"
+                        android:textColor="#BDBDBD"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Auto-start monitoring when device boots"
+                        android:textColor="#757575"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_auto_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:thumbTint="#007BFF"
+                    android:trackTint="#424242" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- How it Works Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:padding="20dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="How it works"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1. Tap 'Start Monitoring' to begin\n2. When any app plays audio through the speaker, the microphone is automatically muted\n3. When audio stops, the mic is unmuted after the configured delay\n4. The service runs in the background with a notification\n5. Use the delay setting to prevent toggling during brief pauses between tracks"
+                android:textColor="#9E9E9E"
+                android:textSize="13sp"
+                android:lineSpacingExtra="4dp" />
+
+        </LinearLayout>
+
+        <!-- Event Log Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:padding="20dp"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event Log"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/tv_log"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No events yet — start monitoring to see activity"
+                android:textColor="#757575"
+                android:textSize="12sp"
+                android:fontFamily="monospace"
+                android:lineSpacingExtra="2dp"
+                android:minHeight="80dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
