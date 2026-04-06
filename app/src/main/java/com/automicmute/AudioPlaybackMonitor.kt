@@ -2,7 +2,7 @@ package com.automicmute
 
 import android.content.Context
 import android.media.AudioManager
-import android.media.AudioPlaybackCallback
+import android.media.AudioManager.AudioPlaybackCallback
 import android.media.AudioPlaybackConfiguration
 import android.os.Build
 import android.os.Handler
@@ -45,6 +45,7 @@ class AudioPlaybackMonitor(
     private fun countActive(configs: List<AudioPlaybackConfiguration>?): Int {
         if (configs == null) return 0
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            @Suppress("NewApi")
             configs.count { it.isActive }
         } else {
             configs.size

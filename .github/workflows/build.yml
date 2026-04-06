@@ -20,6 +20,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Set up Android SDK platform 34
+        run: |
+          echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
+            "platforms;android-34" \
+            "build-tools;34.0.0" \
+            --channel=0 2>/dev/null || true
+
       - name: Set up Gradle 8.2
         uses: gradle/actions/setup-gradle@v4
         with:
