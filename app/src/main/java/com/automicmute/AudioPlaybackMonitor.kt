@@ -4,7 +4,6 @@ import android.content.Context
 import android.media.AudioManager
 import android.media.AudioManager.AudioPlaybackCallback
 import android.media.AudioPlaybackConfiguration
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -39,17 +38,12 @@ class AudioPlaybackMonitor(
     private var unmuteDelayMs = DEFAULT_UNMUTE_DELAY_MS
 
     /**
-     * Count active streams. AudioPlaybackConfiguration.isActive() requires API 29;
-     * on earlier APIs, getActivePlaybackConfigurations() already returns only active items.
+     * Count active streams.
+     * getActivePlaybackConfigurations() already returns only active configs on all API levels,
+     * so a simple size check is sufficient without needing the API-29-only isActive() method.
      */
     private fun countActive(configs: List<AudioPlaybackConfiguration>?): Int {
-        if (configs == null) return 0
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            @Suppress("NewApi")
-            configs.count { it.isActive }
-        } else {
-            configs.size
-        }
+        return configs?.size ?: 0
     }
 
     // Runnable for delayed unmute
